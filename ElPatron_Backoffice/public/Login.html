@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="js/login.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/CSS/Login.css">
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <section class="container forms">
+    <div class="form login">
+      <div class="form-content">
+        <header>Iniciar Sesion</header>
+
+
+
+
+        <form id="loginForm">
+          <div class="field input-field">
+            <input type="text" placeholder="usuario" class="input" name="username" id="Username" required maxlength="35">
+          </div>
+
+          <div style="display: none" id="hide-username-credential">
+            <h3 style="color:red">Este campo es obligatorio</h3>
+          </div>
+          
+          <div class="field input-field">
+            <input type="password" placeholder="Contraseña" class="password" name ="password" id="Password" required maxlength="35">
+            <i class='bx bx-hide eye-icon'></i>
+          </div>
+
+          <div style="display: none" id="hide-password-credential">
+            <h3 style="color:red">Este campo es obligatorio</h3>
+          </div>
+
+          <div style="display: none" id="hide-div">
+            <h3 style="color:red">Credenciales incorrectas</h3>
+          </div>
+          <div class="form-link">
+            <a href="#" class="forgot-pass">Olvidaste tu contraseña</a>
+          </div>
+          <div class="field button-field">
+            <button type="submit" onclick="login(event)" id="btningresar">Ingresar</button>
+          </div>
+        </form>
+
+
+
+        <div class="form-link">
+          <span>No tienes una cuenta?<a href="#" class="link signup-link">Registrate</a></span>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="media-options">
+        <a href="#" class="field google">
+          <img src="images/google.png" alt="" class="google-img">
+          <span>Iniciar sesion con google</span>
+        </a>
+      </div>
+    </div>
+    <!-- Signup Form -->
+    <div class="form signup">
+      <div class="form-content">
+        <header>Registrate</header>
+
+
+
+        <form method="POST" action="/employees">
+          <div class="field input-field">
+            <input type="text" placeholder="Nombre" class="input" name="NombreRegister">
+          </div>
+          <div class="field input-field">
+            <input type="text" placeholder="Apellido1" class="input" name="Apellido1">
+          </div>
+          <div class="field input-field">
+            <input type="text" placeholder="Apellido2" class="input" name="Apellido2">
+          </div>
+          <div class="field input-field">
+            <input type="email" placeholder="Correo Electronico" class="input" name="Email">
+          </div>
+          <div class="field input-field">
+            <input type="text" placeholder="Nombre de usuario" class="input" name="Username">
+          </div>
+          <div class="field input-field">
+            <input type="password" placeholder="Crea una contraseña" class="password" name="PasswordRegister">
+          </div>
+          <div class="field input-field">
+            <input type="password" placeholder="Confirma tu contraseña" class="password" name="ConfirmPasswordRegister">
+            <i class='bx bx-hide eye-icon'></i>
+          </div>
+          <div class="field button-field">
+            <button>Registrarse</button>
+          </div>
+        </form>
+
+
+
+        <div class="form-link">
+          <span>Ya tienes una cuenta? <a href="#" class="link login-link">Iniciar sesion</a></span>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="media-options">
+        <a href="#" class="field facebook">
+          <i class='bx bxl-facebook facebook-icon'></i>
+          <span>Iniciar sesion con facebook</span>
+        </a>
+      </div>
+      <div class="media-options">
+        <a href="#" class="field google">
+          <img src="images/google.png" alt="Google" class="google-img">
+          <span>Iniciar sesion con Google</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- JavaScript -->
+  <script src="/JS/Login_new.js"></script>
+</body>
+</html>

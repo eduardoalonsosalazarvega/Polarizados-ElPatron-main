@@ -1,0 +1,25 @@
+.form-register{
+	width: 400px;
+	height: 400px;
+	background: #b6c1cc;
+	padding: 70px;
+	margin: auto;
+	margin-top: 400 px;
+	border-radius: 40px;
+	font-family: 'calibri';
+	color: black;
+}
+
+
+.controls{
+	width: 100%;
+	background: white;
+	padding:10px;
+	border-radius: 4px;
+	margin-bottom: 16px;
+	border: 1px solid red;
+	font-family: 'calibri';
+	font-size: 18px;
+	color: black;
+	
+}

@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #1a202c 100%);
+      min-height: 100vh;
+    }
+
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .days li {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .days li:hover:not(.inactive):not(.opacity-40) {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .days li.active {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+    }
+
+    .days li.inactive {
+      color: #cbd5e1;
+      cursor: default;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeInUp 0.6s ease;
+    }
+
+    button.selected {
+      background: linear-gradient(135deg, #16a34a, #15803d) !important;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+    }
+
+    .input-field {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      background: #f9fafb;
+    }
+
+    .input-field input:focus {
+      outline: none;
+      border-color: #16a34a;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
+    }
+
+    .input-field label {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 15px;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      background: transparent;
+      padding: 0 4px;
+    }
+
+    .input-field input:focus + label,
+    .input-field input:not(:placeholder-shown) + label {
+      top: 0;
+      font-size: 12px;
+      color: #16a34a;
+      background: white;
+      font-weight: 600;
+    }
+
+    .time-slot {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .time-slot:hover:not(.occupied) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .time-slot.occupied {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .header-gradient {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      padding: 30px;
+      border-radius: 20px 20px 0 0;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+    }
+
+    .scroll-container {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .scroll-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: #16a34a;
+      border-radius: 10px;
+    }
+
+
+
+    .service-card {
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-card.selected-service {
+    border-color: #16a34a !important;
+    background: #f0fdf4;
+    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.2);
+}
+
+/* Estilo para horario seleccionado */
+.time-slot.selected {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    color: white !important;
+    border-color: #1d4ed8 !important;
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5) !important;
+}

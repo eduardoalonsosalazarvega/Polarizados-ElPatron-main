@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElPatron</title>
+    <link rel="stylesheet" href="/CSS/Services.css">
+    <link rel="stylesheet" href="/CSS/Date3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font Link for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <script src="/JS/Date3.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+</head>
+<body>
+
+
+    <style>
+    .disabled {
+        opacity: 0.5;
+    }
+</style>
+
+    <aside class="sidebar">
+        <h2 class="logo">ElPatron</h2>
+        <nav>
+            <ul>
+                <li><a href="#" id="lista-categoria"class="active">Servicios</a></li>
+                <li><a href="#" id="lista-servicios">Categorias</a></li>
+                <li><a href="#" id="lista-citas">Lista de Citas</a></li>
+                <li><a href="#" id="lista-users">Usuarios</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+
+    <!-- Este es el inicio del main -->
+    <main id="content">
+        <!-- Aquí se mostrará el contenido dinámico -->
+         <!-- Inicio de la seccion de servicios  -->
+    <div id="Categoria-Section" class="category-container">
+        <h1>Servicios</h1>
+        <button id="create-category-btn">Crear Nuevo</button>
+    
+        <table id="category-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Servicio</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        <tbody>
+            <!-- Categorías generadas dinámicamente -->
+        </tbody>
+        </table>
+
+    <div id="mini-formulario" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Nuevo Servicio</h2>
+
+        <form id="serviceForm" enctype="multipart/form-data">
+            <label for="nombre-servicio">Nombre:</label>
+            <input type="text" id="nombre-servicio" name="nombre-servicio" required>
+
+            <label for="Precio">Precio:</label>
+            <input type="text" id="Precio" name="Precio" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" maxlength="80" required></textarea>
+
+            <label>Asignar categoría:</label>
+            <select id="categorias-select" name="categoria" required>
+                <option value="">Selecciona una categoría</option>
+            </select>
+
+            <label for="imagen">Imagen:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*" required>
+
+            <button type="submit" id="guardar-btn">Guardar</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+    <div id="edit-form" class="Detail">
+    <div class="Detail-content">
+        <span class="closeDetail">&times;</span>
+        <h2>Editar Servicio</h2>
+
+        <label for="nombre-servicio2">Nombre:</label>
+        <input type="text" id="nombre-servicio2" name="nombre-servicio2">
+
+        <label for="Precio-edit">Precio:</label>
+        <input type="text" id="Precio-edit" name="Precio-edit">
+
+        <label for="descripcion-edit">Descripción:</label>
+        <textarea id="descripcion-edit" name="descripcion-edit" rows="4"></textarea>
+
+        <label>Asignar categoría:</label>
+        <select id="EditarCategoria" name="EditarCategoria">
+            <option value="">Selecciona una categoría</option>
+        </select>
+
+        <label for="imagen-edit">Imagen:</label>
+        <input type="file" id="imagen-edit" name="imagen" accept="image/*">
+
+        <button id="btn-edit">Guardar</button>
+    </div>
+</div>
+
+
+    </div> <!-- Div final del contenedor de categorias o servicios -->
+
+    <div id="Service-Section" class="service-container" style="display:none">
+        <h1>Categorias</h1>
+
+        <button id="create-service-btn">Crear Nuevo</button>
+    
+        <table id="service-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Categoria</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        <tbody>
+            <!-- Categorías generadas dinámicamente -->
+        </tbody>
+        </table>
+        
+    </div>
+
+
+    <div id="mini-service" class="service-form">
+    <div class="service-content">
+        <span class="closeCategory">&times;</span>
+        <h2>Nueva categoria</h2>
+
+            <label for="nombre-categorynew">Nombre:</label>
+            <input type="text" id="nombre-categorynew" name="nombre-categorynew" required>
+
+            <button type="submit" id="guardarEdit-btn">Guardar</button>
+        
+    </div>
+</div>
+
+
+<div id="edit-form-category" class="service-form">
+    <div class="service-content">
+        <span class="closeCategoryEdit">&times;</span>
+        <h2>Editar categoria</h2>
+
+            <label for="servicioedit">Nombre:</label>
+            <input type="text" id="servicioedit" name="servicioedit" required>
+
+            <button type="submit" id="Editarcat-btn">Guardar</button>
+        
+    </div>
+</div>
+
+
+
+
+        <div id="Calendar-Section" style="display:none;">
+            <div class="wrapper">
+      <header>
+        <p class="current-date"></p>
+        <div class="icons">
+          <span id="prev" class="material-symbols-rounded">chevron_left</span>
+          <span id="next" class="material-symbols-rounded">chevron_right</span>
+        </div>
+      </header>
+      <div class="calendar">
+        <ul class="weeks">
+          <li>Dom</li>
+          <li>Lun</li>
+          <li>Mar</li>
+          <li>Mie</li>
+          <li>Jue</li>
+          <li>Vie</li>
+          <li>Sab</li>
+        </ul>
+        <ul class="days"></ul>
+      </div>
+    </div>
+    
+
+    <button id="open-form-btn">Agendar Nueva Cita</button>
+
+
+    <div class="appointment-container">
+    <h2>Citas programadas del <span id="selected-date-text">día</span></h2>
+    <table id="appointment-table">
+        <thead>
+            <tr>
+                <th>#Cita</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Gestionar</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="appointment-form">
+        
+
+    </div>
+
+    <div id="appointment-form" class="form-popup">
+    <div class="form-content" id="user-info">
+        <h2>Agendar Nueva Cita</h2>
+
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" required>
+
+        <label for="surname1">Apellido Paterno:</label>
+        <input type="text" id="surname1" required>
+
+        <label for="surname2">Apellido Materno:</label>
+        <input type="text" id="surname2" required>
+
+        <label for="email">Correo:</label>
+        <input type="email" id="email" required>
+
+        <label for="phone">Número de Teléfono:</label>
+        <input type="tel" id="phone" required>
+
+        <button id="next-step">Siguiente</button>
+        <button id="close-form-btn">Cancelar</button>
+    </div>
+
+<div id="appointment-schedule" class="hidden">
+            <h3>Selecciona un horario</h3>
+            <table id="appointment-table-schedule">
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Disponibilidad</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <button id="submit-appointment">Confirmar Cita</button>
+            <button id="close-form-btn2">Cancelar</button>
+        </div>
+
+</div>
+
+
+
+
+
+</div>
+
+        </div>
+
+
+    <div id="Usuario-Section" style="display:none;">
+    <h1>Usuarios</h1>
+    <button id="register-user-btn">Registrar Usuario</button>
+    
+    <div id="user-form" class="hidden">
+
+        <label for="existing-client">Cliente existente:</label>
+        <input type="checkbox" id="existing-client">
+
+        <label for="client-code" id="client-code-label" class="disabled">Código de Cliente:</label>
+        <input type="text" id="client-code" disabled required>
+
+        <button id="search-btn">
+        <i class="fas fa-search"></i> Buscar
+        </button>
+        
+        <label for="Nombre">Nombre:</label>
+        <input type="text" id="NombreRegister" required>
+
+        <label for="Apellido1">Apellido1:</label>
+        <input type="text" id="Apellido1Register" required>
+
+        <label for="Apellido2">Apellido2:</label>
+        <input type="text" id="Apellido2Register" required>
+
+        <label for="Username">Usuario:</label>
+        <input type="text" id="UsernameRegister" required>
+
+        <label for="Password">Contraseña:</label>
+        <input type="text" id="PasswordRegister" required>
+        
+        <label for="email">Correo:</label>
+        <input type="email" id="CorreoRegister" required>
+
+        <label for="phone">Número de Teléfono:</label>
+        <input type="tel" id="TelefonoRegister" required>
+
+        <button id="submit-user" onclick="SaveUser()">Guardar Usuario</button>
+    </div>
+    
+    <table id="users-table">
+        
+        <tbody></tbody>
+    </table>
+</div>
+
+
+
+
+
+<div id="Detail-form" class="Detail">
+    <div class="Detail-content">
+        <span class="closeDetail2" id="close-btn-detail">&times;</span>
+        <h2>Detalles</h2>
+        
+    </div>
+
+</div>
+
+
+
+    </main>
+
+    
+
+
+
+
+    <script src="/JS/services2.js"></script>
+</body>
+</html>

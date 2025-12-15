@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Calendario de Citas | Polarizados El Patrón</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
+  <script src="javj.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="date.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+  <div class="w-full max-w-6xl">
+    <!-- Header -->
+    <div class="header-gradient mb-6">
+      <h1 class="text-3xl font-bold mb-2">Sistema de Citas</h1>
+      <p class="text-green-100">Polarizados El Patrón</p>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      
+      <!-- Calendar Section (Left) -->
+      <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+        <header class="flex items-center justify-between mb-4">
+          <p class="current-date text-xl font-semibold text-gray-800"></p>
+          <div class="icons flex space-x-2">
+            <span id="prev" class="material-symbols-rounded text-gray-500 hover:bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer text-2xl">chevron_left</span>
+            <span id="next" class="material-symbols-rounded text-gray-500 hover:bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer text-2xl">chevron_right</span>
+          </div>
+        </header>
+        <div class="calendar">
+          <ul class="weeks grid grid-cols-7 text-center text-sm font-medium text-gray-600 mb-3">
+            <li>Dom</li><li>Lun</li><li>Mar</li><li>Mié</li><li>Jue</li><li>Vie</li><li>Sáb</li>
+          </ul>
+          <ul class="days grid grid-cols-7 text-center text-sm text-gray-700 gap-y-4"></ul>
+        </div>
+      </div>
+
+
+      <!-- Services Section (New) -->
+    <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in mb-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecciona un Servicio</h2>
+      <div class="scroll-container">
+        <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Services will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+      <!-- Available Times Section (Right) -->
+      <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Horarios Disponibles</h2>
+        <p class="text-sm text-gray-600 mb-4">
+          <span id="selected-date-text" class="font-semibold text-green-600">Selecciona un día del calendario</span>
+        </p>
+        
+        <div class="scroll-container">
+          <div id="time-slots-container" class="grid grid-cols-2 gap-3">
+            <!-- Time slots will be generated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Section (Bottom) -->
+    <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Datos del Cliente</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="input-field">
+          <input type="text" id="nameInput" placeholder=" " required>
+          <label>Nombre</label>
+        </div>
+        
+        <div class="input-field">
+          <input type="text" id="Apellido1Input" placeholder=" " required>
+          <label>Primer Apellido</label>
+        </div>
+        
+        <div class="input-field">
+          <input type="text" id="Apellido2Input" placeholder=" ">
+          <label>Segundo Apellido</label>
+        </div>
+        
+        <div class="input-field">
+          <input type="email" id="emailInput" placeholder=" " required>
+          <label>Correo Electrónico</label>
+        </div>
+        
+        <div class="input-field md:col-span-2">
+          <input type="tel" id="phoneInput" placeholder=" " required>
+          <label>Teléfono</label>
+        </div>
+      </div>
+
+      <button onclick="bookAppointment()" class="w-full mt-4 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+        Agendar Cita
+      </button>
+    </div>
+  </div>
+
+  
+</body>
+</html>

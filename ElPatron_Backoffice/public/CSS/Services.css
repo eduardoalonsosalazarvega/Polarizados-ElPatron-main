@@ -1,0 +1,443 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2a2e36;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 15px 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+}
+
+nav ul li a.active, nav ul li a:hover {
+    background-color: #007BFF;
+}
+
+
+#content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.visible {
+    display: block;
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+#appointment-form {
+    position: fixed;
+    width: 450px; /* Asegura que no sea más grande de lo necesario */
+    max-height: 80vh; /* Evita que desborde demasiado */
+    overflow-y: auto; /* Permite desplazarse si se necesita */
+}
+
+#appointment-schedule {
+    width: 100%; /* Ocupa todo el formulario */
+}
+
+#appointment-schedule {
+    position: relative; /* Evita que se salga del formulario */
+    top: 0;
+    left: 0;
+}
+
+#search-btn {
+        background-color: #007bff; /* Color azul */
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border-radius: 5px;
+    }
+
+    #search-btn:hover {
+        background-color: #0056b3;
+    }
+
+
+
+    #user-form {
+        display: flex;
+        position: absolute;
+        flex-wrap: wrap;
+        gap: 15px;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 2px;
+        width: 600px; /* Aumenta el ancho */
+        margin: 0 auto; /* Centra el formulario */
+        max-width: 90%;
+    }
+
+    #user-form label {
+        font-weight: bold;
+    }
+
+    #user-form input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #search-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    #search-btn i {
+        font-size: 18px;
+    }
+
+    #submit-user {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    #users-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    #users-table th, #users-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    #users-table th {
+        background-color: #007bff;
+        color: white;
+    }
+
+
+
+
+
+
+
+
+
+
+.category-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.service-container {
+    padding: 20px;
+    text-align: center;
+}
+
+#category-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#category-table th, #category-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+#category-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-completar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 2px 5px; /* Más pequeño */
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    width: auto; /* Se ajusta al texto */
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+/* Cambia de color cuando el usuario pasa el mouse */
+.button-completar:hover {
+    background-color: #218838;
+}
+
+
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.edit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.menu button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.menu button:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Fondo oscuro con desenfoque */
+.modal, .Detail, .service-form {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px); /* Efecto desenfoque */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Contenedor moderno */
+/* Ajuste del formulario */
+.modal-content, .Detail-content, .service-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+    padding: 25px;
+    border-radius: 12px;
+    width: 420px;
+    margin: 10% auto;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs más compactos */
+input {
+    width: 85%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Mejorar el input de imagen */
+#imagen {
+    width: 100%;
+    padding: 6px;
+}
+
+/* Contenedor para imagen e input */
+label[for="imagen"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+/* Botón más armonioso */
+button {
+    background-color: #3E8E41;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2E6E31;
+}
+
+/* Ícono de cerrar ajustado */
+.close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
+    color: #333;
+    transition: color 0.3s ease-in-out;
+}
+
+.close:hover {
+    color: #ff4d4d;
+}
+
+label {
+    display: block; /* Para que el label ocupe todo el ancho disponible */
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: none;
+}
+
+
+
+.closeDetail {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
+    color: #333;
+    transition: color 0.3s ease-in-out;
+}
+
+.closeDetail:hover {
+    color: #ff4d4d;
+}
+
+.closeCategory {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
+    color: #333;
+    transition: color 0.3s ease-in-out;
+}
+
+.closeCategory:hover {
+    color: #ff4d4d;
+}
+
+.closeCategoryEdit {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
+    color: #333;
+    transition: color 0.3s ease-in-out;
+}
+
+.closeCategoryEdit:hover {
+    color: #ff4d4d;
+}

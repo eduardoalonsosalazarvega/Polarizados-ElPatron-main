@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/CSS/Styles.css"/> <!-- Cargamos el css-->
+    <title>Login</title>
+</head>
+
+<body class="body">
+  
+  
+  <br><br><br><br><br><br>
+
+  <section class="form-register">
+    <h1>Iniciar Sesion</h1>
+    <br />
+
+    <form id="loginForm" method="POST" action="/auth">
+      <input class="controls" type="text" name="username" id="username" placeholder="Ingresa tu nombre de usuario" required>
+      <input class="controls" type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
+      <p></p>
+      <button type="submit" style="background-color: beige; height:50px; width: 200px; text-align: center; justify-content: flex-end; margin:right" value="submit">Ingresar</button>
+      <br />
+      <br />
+      <div id="error"></div>
+    </form>
+
+  </section>
+
+
+</body> 
+</html>
