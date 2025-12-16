@@ -25,7 +25,6 @@ const sequelize = new Sequelize(DbConfig.name, DbConfig.user, DbConfig.password,
     timezone: '-06:00', // Zona horaria local (México, CST)
 
     dialectOptions: {
-        useUTC: false,          // Evita conversión automática UTC
         dateStrings: true,      // Evita que agregue la "Z"
         typeCast: function (field, next) {
             if (field.type === "DATETIME") {

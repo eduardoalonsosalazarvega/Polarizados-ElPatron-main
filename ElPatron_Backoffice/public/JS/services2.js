@@ -134,8 +134,12 @@ window.editCategory = function editCategory(id) {
             <td>$${category.Precio}</td>
             <td>${data.Nombre}</td>
             <td>
-                <button class="edit-btn" onclick="editCategory(${category.Id})">Editar</button>
-                <button class="delete-btn" onclick="deleteCategory(${category.Id})">Eliminar</button>
+                <button class="icon-btn edit-btn" onclick="editCategory(${category.Id})" title="Editar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                </button>
+                <button class="icon-btn delete-btn" onclick="deleteCategory(${category.Id})" title="Eliminar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </button>
             </td>
         `;
         categoryTableBody.appendChild(row);
@@ -168,8 +172,12 @@ function renderServices(categories) {
             <td>${category.Id}</td>
             <td>${category.Nombre}</td>
             <td>
-                <button class="edit-btn" onclick="editService(${category.Id})">Editar</button>
-                <button class="delete-btn" onclick="deleteService(${category.Id})">Eliminar</button>
+                <button class="icon-btn edit-btn" onclick="editService(${category.Id})" title="Editar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                </button>
+                <button class="icon-btn delete-btn" onclick="deleteService(${category.Id})" title="Eliminar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </button>
             </td>
         `;
         serviceTableBody.appendChild(row);
