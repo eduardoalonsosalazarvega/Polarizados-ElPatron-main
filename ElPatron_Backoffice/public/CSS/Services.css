@@ -1,443 +1,659 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
+/* Google Fonts - Inter (más moderno y limpio) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #dc2626;
+    --primary-light: #fef2f2;
+    --dark: #0f172a;
+    --dark-secondary: #1e293b;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --white: #ffffff;
+    --success: #10b981;
+    --danger: #ef4444;
+    --radius: 12px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--gray-50);
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+/* ==================== SIDEBAR ==================== */
 .sidebar {
-    width: 250px;
-    background-color: #2a2e36;
-    color: white;
+    width: 240px;
+    background: var(--dark);
     height: 100vh;
-    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.sidebar-logo-img {
+    width: 100px;
+    height: auto;
+    opacity: 0.95;
+    transition: opacity 0.2s;
+}
+
+.sidebar-logo-img:hover {
+    opacity: 1;
 }
 
 .logo {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
+    display: none;
 }
 
 nav ul {
     list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: white;
-    padding: 10px;
     display: block;
-    border-radius: 5px;
+    padding: 12px 16px;
+    color: var(--gray-400);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
-nav ul li a.active, nav ul li a:hover {
-    background-color: #007BFF;
+nav ul li a:hover {
+    color: var(--white);
+    background: var(--dark-secondary);
 }
 
+nav ul li a.active {
+    color: var(--white);
+    background: var(--primary);
+}
 
+/* ==================== MAIN CONTENT ==================== */
 #content {
-    flex: 1;
-    padding: 20px;
-    background-color: #f4f4f4;
+    margin-left: 240px;
+    padding: 40px;
     min-height: 100vh;
 }
 
-.hidden {
+/* ==================== TYPOGRAPHY ==================== */
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    letter-spacing: -0.3px;
+}
+
+/* ==================== CONTAINERS ==================== */
+.category-container,
+.service-container {
+    max-width: 1200px;
+}
+
+/* ==================== BUTTONS ==================== */
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--primary);
+    color: var(--white);
+}
+
+button:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#create-category-btn,
+#create-service-btn,
+#register-user-btn,
+#open-form-btn {
+    margin: 24px 0 32px 0;
+}
+
+/* ==================== TABLES ==================== */
+#category-table,
+#service-table,
+#users-table,
+#appointment-table,
+#appointment-table-schedule {
+    width: 100%;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+}
+
+#category-table th,
+#service-table th,
+#users-table th,
+#appointment-table th,
+#appointment-table-schedule th {
+    background: var(--gray-50);
+    color: var(--gray-600);
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+#category-table td,
+#service-table td,
+#users-table td,
+#appointment-table td,
+#appointment-table-schedule td {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-100);
+    text-align: left;
+}
+
+#category-table tbody tr,
+#service-table tbody tr,
+#users-table tbody tr,
+#appointment-table tbody tr {
+    transition: background 0.15s;
+}
+
+#category-table tbody tr:hover,
+#service-table tbody tr:hover,
+#users-table tbody tr:hover,
+#appointment-table tbody tr:hover {
+    background: var(--gray-50);
+}
+
+#category-table tbody tr:last-child td,
+#service-table tbody tr:last-child td,
+#users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Center specific columns */
+#category-table th:first-child,
+#category-table td:first-child,
+#service-table th:first-child,
+#service-table td:first-child {
+    text-align: center;
+    width: 60px;
+}
+
+#category-table th:last-child,
+#category-table td:last-child,
+#service-table th:last-child,
+#service-table td:last-child {
+    text-align: center;
+}
+
+/* ==================== ACTION BUTTONS (ICON STYLE) ==================== */
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+}
+
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-btn.edit-btn {
+    color: var(--gray-500);
+    background: var(--gray-100);
+}
+
+.icon-btn.edit-btn:hover {
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    transform: scale(1.05);
+}
+
+.icon-btn.delete-btn {
+    color: var(--gray-500);
+    background: var(--gray-100);
+    margin-left: 4px;
+}
+
+.icon-btn.delete-btn:hover {
+    color: var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.05);
+}
+
+/* Legacy text buttons (fallback) */
+.edit-btn:not(.icon-btn),
+.delete-btn:not(.icon-btn) {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.edit-btn:not(.icon-btn) {
+    background: var(--success);
+    color: var(--white);
+}
+
+.delete-btn:not(.icon-btn) {
+    background: var(--danger);
+    color: var(--white);
+    margin-left: 8px;
+}
+
+.button-completar {
+    background: var(--success);
+    color: var(--white);
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.button-completar:hover {
+    background: #059669;
+}
+
+/* ==================== MODALS ==================== */
+.modal,
+.Detail,
+.service-form {
     display: none;
-    opacity: 0;
-    transform: scaleY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-content,
+.Detail-content,
+.service-content {
+    background: var(--white);
+    padding: 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    margin: 60px auto;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlide 0.25s ease;
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content h2,
+.Detail-content h2,
+.service-content h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+/* ==================== FORM ELEMENTS ==================== */
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-600);
+    margin-bottom: 6px;
+    margin-top: 16px;
+}
+
+label:first-of-type {
+    margin-top: 0;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--gray-700);
+    transition: all 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--gray-400);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+input[type="file"] {
+    padding: 8px;
+    font-size: 13px;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    border: 1px solid var(--gray-300);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: all 0.2s;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: var(--gray-200);
+}
+
+/* Modal buttons */
+.modal-content button,
+.Detail-content button,
+.service-content button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+}
+
+/* ==================== CLOSE BUTTONS ==================== */
+.close,
+.closeDetail,
+.closeDetail2,
+.closeCategory,
+.closeCategoryEdit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--gray-400);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.close:hover,
+.closeDetail:hover,
+.closeDetail2:hover,
+.closeCategory:hover,
+.closeCategoryEdit:hover {
+    color: var(--gray-600);
+    background: var(--gray-100);
+}
+
+/* ==================== USER SECTION ==================== */
+#Usuario-Section h1 {
+    margin-bottom: 8px;
+}
+
+#user-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--white);
+    padding: 24px;
+    border-radius: var(--radius);
+    margin: 24px 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+}
+
+#user-form label {
+    width: 100%;
+    margin: 0;
+}
+
+#user-form input {
+    flex: 1;
+    min-width: 200px;
+}
+
+#search-btn {
+    background: var(--dark);
+}
+
+#search-btn:hover {
+    background: var(--dark-secondary);
+}
+
+#submit-user {
+    background: var(--success);
+    flex-basis: 100%;
+}
+
+#submit-user:hover {
+    background: #059669;
+}
+
+/* ==================== APPOINTMENT FORM ==================== */
+#appointment-form {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1001;
+}
+
+#appointment-form .form-content {
+    background: var(--white);
+    padding: 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+}
+
+#appointment-schedule {
+    width: 100%;
+}
+
+.form-popup {
+    display: none;
+}
+
+.appointment-container {
+    background: var(--white);
+    padding: 24px;
+    border-radius: var(--radius);
+    margin-top: 32px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+}
+
+.appointment-container h2 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+/* ==================== UTILITIES ==================== */
+.hidden {
+    display: none !important;
 }
 
 .visible {
     display: block;
-    opacity: 1;
-    transform: scaleY(1);
 }
 
-#appointment-form {
-    position: fixed;
-    width: 450px; /* Asegura que no sea más grande de lo necesario */
-    max-height: 80vh; /* Evita que desborde demasiado */
-    overflow-y: auto; /* Permite desplazarse si se necesita */
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
-#appointment-schedule {
-    width: 100%; /* Ocupa todo el formulario */
+/* ==================== RESPONSIVE ==================== */
+@media screen and (max-width: 900px) {
+    .sidebar {
+        width: 200px;
+        padding: 24px 12px;
+    }
+    
+    #content {
+        margin-left: 200px;
+        padding: 24px;
+    }
+    
+    .sidebar-logo-img {
+        width: 80px;
+    }
 }
 
-#appointment-schedule {
-    position: relative; /* Evita que se salga del formulario */
-    top: 0;
-    left: 0;
-}
-
-#search-btn {
-        background-color: #007bff; /* Color azul */
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        cursor: pointer;
-        display: flex;
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 16px;
+        flex-direction: row;
         align-items: center;
-        gap: 5px;
-        border-radius: 5px;
+        justify-content: space-between;
     }
-
-    #search-btn:hover {
-        background-color: #0056b3;
+    
+    .sidebar-logo {
+        margin-bottom: 0;
     }
-
-
-
-    #user-form {
-        display: flex;
-        position: absolute;
+    
+    .sidebar-logo-img {
+        width: 60px;
+    }
+    
+    nav ul {
+        flex-direction: row;
         flex-wrap: wrap;
-        gap: 15px;
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 2px;
-        width: 600px; /* Aumenta el ancho */
-        margin: 0 auto; /* Centra el formulario */
-        max-width: 90%;
+        gap: 4px;
     }
-
-    #user-form label {
-        font-weight: bold;
+    
+    nav ul li a {
+        padding: 8px 12px;
+        font-size: 13px;
     }
-
+    
+    #content {
+        margin-left: 0;
+        padding: 20px 16px;
+    }
+    
+    .modal-content,
+    .Detail-content,
+    .service-content {
+        margin: 20px auto;
+        padding: 24px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    #user-form {
+        padding: 16px;
+    }
+    
     #user-form input {
-        width: 100%;
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+        min-width: 100%;
     }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    #search-btn {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin-top: 10px;
-    }
-
-    #search-btn i {
-        font-size: 18px;
-    }
-
-    #submit-user {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        width: 100%;
-        margin-top: 15px;
-    }
-
-    #users-table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-    }
-
-    #users-table th, #users-table td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
-    }
-
-    #users-table th {
-        background-color: #007bff;
-        color: white;
-    }
-
-
-
-
-
-
-
-
-
-
-.category-container {
-    padding: 20px;
-    text-align: center;
-}
-
-.service-container {
-    padding: 20px;
-    text-align: center;
-}
-
-#category-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-#category-table th, #category-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-
-#category-table th {
-    background-color: #007bff;
-    color: white;
-}
-
-.button-completar {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 2px 5px; /* Más pequeño */
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    width: auto; /* Se ajusta al texto */
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-/* Cambia de color cuando el usuario pasa el mouse */
-.button-completar:hover {
-    background-color: #218838;
-}
-
-
-
-.edit-btn, .delete-btn {
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.edit-btn {
-    background-color: #28a745;
-    color: white;
-}
-
-.delete-btn {
-    background-color: #dc3545;
-    color: white;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.menu {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.menu button {
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.menu button:hover {
-    background-color: #0056b3;
-}
-
-.hidden {
-    display: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Fondo oscuro con desenfoque */
-.modal, .Detail, .service-form {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(8px); /* Efecto desenfoque */
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* Contenedor moderno */
-/* Ajuste del formulario */
-.modal-content, .Detail-content, .service-content {
-    background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
-    padding: 25px;
-    border-radius: 12px;
-    width: 420px;
-    margin: 10% auto;
-    text-align: center;
-    position: relative;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Inputs más compactos */
-input {
-    width: 85%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-/* Mejorar el input de imagen */
-#imagen {
-    width: 100%;
-    padding: 6px;
-}
-
-/* Contenedor para imagen e input */
-label[for="imagen"] {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-}
-
-/* Botón más armonioso */
-button {
-    background-color: #3E8E41;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #2E6E31;
-}
-
-/* Ícono de cerrar ajustado */
-.close {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
-    color: #333;
-    transition: color 0.3s ease-in-out;
-}
-
-.close:hover {
-    color: #ff4d4d;
-}
-
-label {
-    display: block; /* Para que el label ocupe todo el ancho disponible */
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-textarea {
-    width: 90%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    resize: none;
-}
-
-
-
-.closeDetail {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
-    color: #333;
-    transition: color 0.3s ease-in-out;
-}
-
-.closeDetail:hover {
-    color: #ff4d4d;
-}
-
-.closeCategory {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
-    color: #333;
-    transition: color 0.3s ease-in-out;
-}
-
-.closeCategory:hover {
-    color: #ff4d4d;
-}
-
-.closeCategoryEdit {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer; /* Hace que se vea la manita al pasar el mouse */
-    color: #333;
-    transition: color 0.3s ease-in-out;
-}
-
-.closeCategoryEdit:hover {
-    color: #ff4d4d;
 }
