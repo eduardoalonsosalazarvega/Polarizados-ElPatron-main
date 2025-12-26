@@ -2,25 +2,297 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mis Citas</title>
-  <link rel="stylesheet" href="output.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Citas | Polarizados El Patrón</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#dc2626',
+            'primary-dark': '#b91c1c',
+            'primary-light': '#fee2e2',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2d1f1f 100%); }
+    
+    /* Modal styles */
+    .modal-overlay {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+    }
+    
+    /* Calendar in modal */
+    .mini-calendar .days li {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 13px;
+    }
+    .mini-calendar .days li:hover:not(.inactive):not(.past) {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    .mini-calendar .days li.active {
+      background: #dc2626;
+      color: white;
+    }
+    .mini-calendar .days li.inactive,
+    .mini-calendar .days li.past {
+      color: #cbd5e1;
+      cursor: not-allowed;
+    }
+    
+    /* Time slot in modal */
+    .time-option {
+      transition: all 0.2s;
+    }
+    .time-option:hover:not(.occupied) {
+      background: #fee2e2;
+      border-color: #dc2626;
+    }
+    .time-option.selected {
+      background: #dc2626 !important;
+      color: white !important;
+      border-color: #dc2626 !important;
+    }
+    .time-option.occupied {
+      background: #f1f5f9;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
+<body class="min-h-screen">
 
-<body class="bg-cream-100">
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 lg:px-12 py-3 bg-white/95 backdrop-blur-sm shadow-sm">
+    <a href="index.html" class="flex items-center">
+      <img src="login/patron.png" alt="El Patrón" class="h-10 sm:h-12 lg:h-14 w-auto">
+    </a>
+    <div class="flex items-center gap-4 md:gap-6">
+      <a href="index.html" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium">
+        <i class="fas fa-home mr-1"></i> Inicio
+      </a>
+      <span class="text-red-600 text-sm font-semibold">
+        <i class="fas fa-calendar-check mr-1"></i> Mis citas
+      </span>
+      <button id="btnLogout" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-600 transition-all" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </nav>
 
-<nav class="p-4 bg-white shadow flex justify-between items-center">
-  <h1 class="font-bold text-xl">Polarizados El Patrón</h1>
-  <a href="/index.html" class="text-gray-600 hover:text-black">Regresar</a>
-</nav>
+  <!-- Main Content -->
+  <main class="pt-24 pb-12 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 mb-8 text-white shadow-xl">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+            <i class="fas fa-calendar-alt text-2xl"></i>
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-bold">Mis Citas</h1>
+            <p class="text-red-100 text-sm mt-1">Gestiona, cancela o reagenda tus citas</p>
+          </div>
+        </div>
+      </div>
 
-<section class="max-w-3xl mx-auto mt-10 p-6">
-  <h2 class="text-2xl font-bold mb-6">Mis Citas</h2>
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="bg-white/95 backdrop-blur rounded-xl p-4 text-center shadow-lg">
+          <p id="totalCitas" class="text-2xl font-bold text-gray-800">0</p>
+          <p class="text-xs text-gray-500 mt-1">Total</p>
+        </div>
+        <div class="bg-white/95 backdrop-blur rounded-xl p-4 text-center shadow-lg">
+          <p id="citasPendientes" class="text-2xl font-bold text-yellow-500">0</p>
+          <p class="text-xs text-gray-500 mt-1">Pendientes</p>
+        </div>
+        <div class="bg-white/95 backdrop-blur rounded-xl p-4 text-center shadow-lg">
+          <p id="citasCompletadas" class="text-2xl font-bold text-green-500">0</p>
+          <p class="text-xs text-gray-500 mt-1">Completadas</p>
+        </div>
+      </div>
 
-  <div id="listaCitas" class="space-y-4"></div>
-</section>
+      <!-- Lista de Citas -->
+      <div class="bg-white/95 backdrop-blur rounded-2xl shadow-xl p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+            <span class="w-1 h-6 bg-red-600 rounded"></span>
+            Historial de Citas
+          </h2>
+          <a href="Calendario/date.html" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all text-sm font-medium flex items-center gap-2">
+            <i class="fas fa-plus"></i>
+            Nueva cita
+          </a>
+        </div>
+        
+        <div id="listaCitas" class="space-y-4">
+          <!-- Loading State -->
+          <div class="text-center py-12">
+            <i class="fas fa-spinner fa-spin text-4xl text-gray-300 mb-4"></i>
+            <p class="text-gray-500">Cargando tus citas...</p>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </main>
+
+  <!-- Modal Detalles de Cita -->
+  <div id="modalDetalleCita" class="hidden fixed inset-0 z-50 modal-overlay flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 text-white relative">
+        <button id="cerrarModalDetalle" class="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="text-center">
+          <span id="modal-cita-numero" class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-semibold mb-2">#000</span>
+          <h3 class="font-bold text-xl">Detalles de la Cita</h3>
+          <span id="modal-estado-header" class="inline-block mt-2 bg-white/90 text-yellow-600 px-3 py-1 rounded-full text-xs font-semibold">Pendiente</span>
+        </div>
+      </div>
+      
+      <!-- Body -->
+      <div class="p-5 overflow-y-auto max-h-[55vh]">
+        <!-- Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+          <!-- Fecha y Hora -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
+            <div class="bg-gray-800 text-white px-4 py-2 text-xs font-semibold flex items-center gap-2">
+              <i class="fas fa-calendar-alt"></i> Fecha y Hora
+            </div>
+            <div class="p-4">
+              <p id="modal-fecha" class="font-semibold text-gray-800 mb-1">-</p>
+              <p id="modal-horario" class="text-red-600 font-bold flex items-center gap-2">
+                <i class="fas fa-clock text-sm"></i> <span>-</span>
+              </p>
+            </div>
+          </div>
+          
+          <!-- Estado -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
+            <div class="bg-gray-800 text-white px-4 py-2 text-xs font-semibold flex items-center gap-2">
+              <i class="fas fa-info-circle"></i> Estado
+            </div>
+            <div class="p-4">
+              <span id="modal-estado" class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700">Pendiente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Servicios -->
+        <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
+          <div class="bg-gray-800 text-white px-4 py-2 text-xs font-semibold flex items-center gap-2">
+            <i class="fas fa-tools"></i> Servicios Solicitados
+          </div>
+          <div id="modal-servicios-lista" class="p-3 max-h-48 overflow-y-auto">
+            <p class="text-center text-gray-400 py-4"><i class="fas fa-spinner fa-spin mr-2"></i> Cargando...</p>
+          </div>
+          <div class="bg-gray-900 text-white px-4 py-3 flex justify-between items-center">
+            <span class="text-sm text-gray-400">Total estimado</span>
+            <span id="modal-total-precio" class="text-xl font-bold text-green-400">$0.00</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="border-t p-4 bg-gray-50 flex gap-3">
+        <button id="btnCerrarDetalle" class="flex-1 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-medium hover:bg-gray-100 transition flex items-center justify-center gap-2">
+          <i class="fas fa-arrow-left"></i> Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Reagendar -->
+  <div id="modalReagendar" class="hidden fixed inset-0 z-50 modal-overlay flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden">
+      <!-- Header del Modal -->
+      <div class="bg-gradient-to-r from-red-600 to-red-700 p-5 text-white">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Reagendar Cita</h3>
+              <p class="text-red-100 text-xs">Selecciona nueva fecha y hora</p>
+            </div>
+          </div>
+          <button id="cerrarModalReagendar" class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Contenido del Modal -->
+      <div class="p-5 overflow-y-auto max-h-[60vh]">
+        <input type="hidden" id="citaIdReagendar">
+        
+        <!-- Mini Calendario -->
+        <div class="mini-calendar mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <p id="mesActualModal" class="font-semibold text-gray-800"></p>
+            <div class="flex gap-2">
+              <button id="prevMesModal" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-600 flex items-center justify-center transition">
+                <i class="fas fa-chevron-left text-sm"></i>
+              </button>
+              <button id="nextMesModal" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-600 flex items-center justify-center transition">
+                <i class="fas fa-chevron-right text-sm"></i>
+              </button>
+            </div>
+          </div>
+          <ul class="grid grid-cols-7 text-center text-xs font-semibold text-gray-400 mb-2">
+            <li>Dom</li><li>Lun</li><li>Mar</li><li>Mié</li><li>Jue</li><li>Vie</li><li>Sáb</li>
+          </ul>
+          <ul id="diasModal" class="days grid grid-cols-7 text-center gap-1"></ul>
+        </div>
+
+        <!-- Horarios disponibles -->
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-3">
+            <i class="far fa-clock text-red-500 mr-1"></i>
+            Horarios disponibles para: <span id="fechaSeleccionadaModal" class="text-red-600">--</span>
+          </p>
+          <div id="horariosModal" class="grid grid-cols-3 gap-2">
+            <p class="col-span-3 text-center text-gray-400 text-sm py-4">Selecciona una fecha</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer del Modal -->
+      <div class="border-t p-5 bg-gray-50 flex gap-3">
+        <button id="btnCancelarReagendar" class="flex-1 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-medium hover:bg-gray-100 transition">
+          Cancelar
+        </button>
+        <button id="btnConfirmarReagendar" class="flex-1 py-3 rounded-xl bg-red-600 text-white font-medium hover:bg-red-700 transition flex items-center justify-center gap-2" disabled>
+          <i class="fas fa-check"></i>
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script src="toast.js"></script>
 <script src="miscitas.js"></script>
-
 </body>
 </html>

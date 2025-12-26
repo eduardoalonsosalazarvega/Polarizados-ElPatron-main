@@ -11,8 +11,19 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// 🔥 Parsear fecha sin conversión de zona horaria
+function parseDateTimeLocal(dateStr) {
+    if (!dateStr) return new Date();
+    const str = String(dateStr).replace('T', ' ').replace('Z', '');
+    const [datePart, timePart] = str.split(' ');
+    const [year, month, day] = datePart.split('-').map(Number);
+    const [hour, minute] = (timePart || '00:00').split(':').map(Number);
+    return new Date(year, month - 1, day, hour, minute);
+}
+
 async function sendEmailReminder(cita) {
-    const fechaInicio = new Date(cita.fechaInicio);
+    // 🔥 Usar parseo sin conversión de zona horaria
+    const fechaInicio = parseDateTimeLocal(cita.fechaInicio);
     
     const fechaFormateada = fechaInicio.toLocaleDateString('es-MX', {
         weekday: 'long',
