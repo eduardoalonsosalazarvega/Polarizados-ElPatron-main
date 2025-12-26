@@ -5,102 +5,279 @@
   <title>Calendario de Citas | Polarizados El Patrón</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
-  <script src="javj.js" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="date.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#dc2626',
+            'primary-dark': '#b91c1c',
+            'primary-light': '#fee2e2',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="date.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../toast.js" defer></script>
+  <script src="javj.js" defer></script>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
+<body class="min-h-screen flex flex-col">
 
-  <div class="w-full max-w-6xl">
-    <!-- Header -->
-    <div class="header-gradient mb-6">
-      <h1 class="text-3xl font-bold mb-2">Sistema de Citas</h1>
-      <p class="text-green-100">Polarizados El Patrón</p>
-    </div>
-
-    <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+  <!-- Navbar (igual que el home) -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 lg:px-12 py-3 bg-white/95 backdrop-blur-sm shadow-sm">
+    <a href="../index.html" class="flex items-center">
+      <img src="../login/patron.png" alt="El Patrón" class="h-10 sm:h-12 lg:h-14 w-auto">
+    </a>
+    <div class="flex items-center gap-4 md:gap-6">
+      <a href="../index.html" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium hidden sm:block">
+        <i class="fas fa-home mr-1"></i> Inicio
+      </a>
       
-      <!-- Calendar Section (Left) -->
-      <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
-        <header class="flex items-center justify-between mb-4">
-          <p class="current-date text-xl font-semibold text-gray-800"></p>
-          <div class="icons flex space-x-2">
-            <span id="prev" class="material-symbols-rounded text-gray-500 hover:bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer text-2xl">chevron_left</span>
-            <span id="next" class="material-symbols-rounded text-gray-500 hover:bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer text-2xl">chevron_right</span>
-          </div>
-        </header>
-        <div class="calendar">
-          <ul class="weeks grid grid-cols-7 text-center text-sm font-medium text-gray-600 mb-3">
-            <li>Dom</li><li>Lun</li><li>Mar</li><li>Mié</li><li>Jue</li><li>Vie</li><li>Sáb</li>
-          </ul>
-          <ul class="days grid grid-cols-7 text-center text-sm text-gray-700 gap-y-4"></ul>
-        </div>
-      </div>
-
-
-      <!-- Services Section (New) -->
-    <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in mb-6">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Selecciona un Servicio</h2>
-      <div class="scroll-container">
-        <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Services will be loaded here -->
-        </div>
-      </div>
-    </div>
-
-      <!-- Available Times Section (Right) -->
-      <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Horarios Disponibles</h2>
-        <p class="text-sm text-gray-600 mb-4">
-          <span id="selected-date-text" class="font-semibold text-green-600">Selecciona un día del calendario</span>
-        </p>
-        
-        <div class="scroll-container">
-          <div id="time-slots-container" class="grid grid-cols-2 gap-3">
-            <!-- Time slots will be generated here -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Form Section (Bottom) -->
-    <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
-      <h2 class="text-xl font-semibold text-gray-800 mb-6">Datos del Cliente</h2>
+      <!-- Botón Login (visible cuando NO está logueado) -->
+      <a href="../login/login.html" id="btnLogin" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium hidden sm:block">
+        <i class="fas fa-user mr-1"></i> Iniciar sesión
+      </a>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="input-field">
-          <input type="text" id="nameInput" placeholder=" " required>
-          <label>Nombre</label>
-        </div>
-        
-        <div class="input-field">
-          <input type="text" id="Apellido1Input" placeholder=" " required>
-          <label>Primer Apellido</label>
-        </div>
-        
-        <div class="input-field">
-          <input type="text" id="Apellido2Input" placeholder=" ">
-          <label>Segundo Apellido</label>
-        </div>
-        
-        <div class="input-field">
-          <input type="email" id="emailInput" placeholder=" " required>
-          <label>Correo Electrónico</label>
-        </div>
-        
-        <div class="input-field md:col-span-2">
-          <input type="tel" id="phoneInput" placeholder=" " required>
-          <label>Teléfono</label>
-        </div>
-      </div>
-
-      <button onclick="bookAppointment()" class="w-full mt-4 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
-        Agendar Cita
+      <!-- Botón Mis Citas (visible cuando está logueado) -->
+      <a href="../miscitas.html" id="btnMisCitas" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium hidden">
+        <i class="fas fa-calendar-check mr-1"></i> Mis citas
+      </a>
+      
+      <!-- Botón Logout (visible cuando está logueado) -->
+      <button id="btnLogout" class="hidden w-9 h-9 items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-600 transition-all" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i>
       </button>
+      
+      <span class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+        <i class="fas fa-calendar-check mr-1"></i> Agendar cita
+      </span>
     </div>
-  </div>
+  </nav>
 
-  
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col items-center justify-start px-4 md:px-6 pt-24 pb-8">
+    <div class="w-full max-w-6xl">
+      <!-- Header -->
+      <div class="header-gradient mb-6">
+        <h1 class="text-2xl md:text-3xl font-bold mb-2">Sistema de Citas</h1>
+        <p class="text-red-100 text-sm md:text-base">Polarizados El Patrón</p>
+      </div>
+
+      <!-- Main Content Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Calendar Section (Left) -->
+        <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+          <header class="flex items-center justify-between mb-6">
+            <p class="current-date text-xl font-bold text-gray-800"></p>
+            <div class="icons flex space-x-2">
+              <span id="prev" class="material-symbols-rounded text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-xl w-10 h-10 flex items-center justify-center cursor-pointer text-2xl transition-all">chevron_left</span>
+              <span id="next" class="material-symbols-rounded text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-xl w-10 h-10 flex items-center justify-center cursor-pointer text-2xl transition-all">chevron_right</span>
+            </div>
+          </header>
+          <div class="calendar">
+            <ul class="weeks grid grid-cols-7 text-center text-xs font-semibold text-gray-500 mb-4 uppercase tracking-wider">
+              <li>Dom</li><li>Lun</li><li>Mar</li><li>Mié</li><li>Jue</li><li>Vie</li><li>Sáb</li>
+            </ul>
+            <ul class="days grid grid-cols-7 text-center text-sm text-gray-700 gap-y-3"></ul>
+          </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+          <h2 class="section-header">Selecciona un Servicio</h2>
+          <div class="scroll-container">
+            <div id="services-container" class="grid grid-cols-1 gap-3">
+              <div class="col-span-1 text-center text-gray-500 py-8">
+                <span class="material-symbols-rounded text-4xl text-gray-300 mb-2">sync</span>
+                <p>Cargando servicios...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Available Times Section -->
+        <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+          <h2 class="section-header">Horarios Disponibles</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            <span id="selected-date-text" class="font-semibold text-red-600">Selecciona un día del calendario</span>
+          </p>
+          
+          <div class="scroll-container">
+            <div id="time-slots-container" class="grid grid-cols-3 gap-3">
+              <div class="col-span-3 text-center text-gray-500 py-8">
+                <span class="material-symbols-rounded text-4xl text-gray-300 mb-2">schedule</span>
+                <p>Cargando horarios...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in">
+          <h2 class="section-header">Resumen de Selección</h2>
+          <div id="resumen-servicios" class="mb-4">
+            <div class="bg-gray-50 rounded-xl p-6 text-center">
+              <span class="material-symbols-rounded text-4xl text-gray-300 mb-2">checklist</span>
+              <p class="text-gray-500">No has seleccionado ningún servicio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Section (Bottom) -->
+      <div class="glass-effect rounded-2xl shadow-xl p-6 animate-fade-in" id="formSection">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="section-header mb-0">Datos del Cliente</h2>
+          <!-- Badge usuario logueado -->
+          <span id="userLoggedBadge" class="hidden bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+            <i class="fas fa-check-circle"></i>
+            Datos cargados
+          </span>
+        </div>
+
+        <!-- Mensaje para usuario logueado -->
+        <div id="loggedUserMessage" class="hidden bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+              <i class="fas fa-user-check text-blue-600"></i>
+            </div>
+            <div>
+              <p class="text-blue-800 font-medium text-sm">¡Hola, <span id="welcomeUserName">Usuario</span>!</p>
+              <p class="text-blue-600 text-xs">Tus datos se han cargado automáticamente</p>
+            </div>
+          </div>
+        </div>
+        
+        <form id="appointmentForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4" novalidate>
+          <!-- Nombre -->
+          <div class="input-field-wrapper">
+            <div class="input-field">
+              <input 
+                type="text" 
+                id="nameInput" 
+                placeholder=" " 
+                required
+                minlength="2"
+                maxlength="50"
+                pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+              >
+              <label>Nombre <span class="text-red-500">*</span></label>
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+          
+          <!-- Primer Apellido -->
+          <div class="input-field-wrapper">
+            <div class="input-field">
+              <input 
+                type="text" 
+                id="Apellido1Input" 
+                placeholder=" " 
+                required
+                minlength="2"
+                maxlength="50"
+                pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+              >
+              <label>Primer Apellido <span class="text-red-500">*</span></label>
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+          
+          <!-- Segundo Apellido -->
+          <div class="input-field-wrapper">
+            <div class="input-field">
+              <input 
+                type="text" 
+                id="Apellido2Input" 
+                placeholder=" "
+                maxlength="50"
+                pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$"
+              >
+              <label>Segundo Apellido</label>
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+          
+          <!-- Correo Electrónico -->
+          <div class="input-field-wrapper">
+            <div class="input-field">
+              <input 
+                type="email" 
+                id="emailInput" 
+                placeholder=" " 
+                required
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              >
+              <label>Correo Electrónico <span class="text-red-500">*</span></label>
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+          
+          <!-- Teléfono -->
+          <div class="input-field-wrapper md:col-span-2">
+            <div class="input-field">
+              <input 
+                type="tel" 
+                id="phoneInput" 
+                placeholder=" " 
+                required
+                minlength="10"
+                maxlength="15"
+                pattern="^[0-9]{10,15}$"
+              >
+              <label>Teléfono <span class="text-red-500">*</span></label>
+            </div>
+            <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+        </form>
+
+        <!-- Error general -->
+        <div id="formErrorGeneral" class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm mt-4 flex items-center gap-2">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>Por favor completa todos los campos requeridos correctamente</span>
+        </div>
+
+        <!-- Resumen antes de agendar -->
+        <div id="bookingSummary" class="hidden bg-gray-50 rounded-xl p-4 mt-4">
+          <h4 class="font-semibold text-gray-700 text-sm mb-2">
+            <i class="fas fa-clipboard-check text-red-500 mr-1"></i>
+            Resumen de tu cita
+          </h4>
+          <div class="grid grid-cols-2 gap-2 text-sm">
+            <p class="text-gray-500">Fecha:</p>
+            <p id="summaryFecha" class="text-gray-800 font-medium">--</p>
+            <p class="text-gray-500">Hora:</p>
+            <p id="summaryHora" class="text-gray-800 font-medium">--</p>
+            <p class="text-gray-500">Servicios:</p>
+            <p id="summaryServicios" class="text-gray-800 font-medium">--</p>
+          </div>
+        </div>
+
+        <button 
+          type="button"
+          id="btnAgendarCita"
+          onclick="bookAppointment()" 
+          class="w-full mt-6 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-4 rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+        >
+          <span class="material-symbols-rounded">calendar_month</span>
+          Agendar Cita
+        </button>
+
+        <p class="text-xs text-gray-400 text-center mt-3">
+          <i class="fas fa-info-circle mr-1"></i>
+          Los campos marcados con <span class="text-red-500">*</span> son obligatorios
+        </p>
+      </div>
+    </div>
+  </main>
+
 </body>
 </html>

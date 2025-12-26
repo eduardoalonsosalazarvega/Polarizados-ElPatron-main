@@ -1,5 +1,5 @@
 const CitaController ={};
-const {Cita, Cita_Servicio} = require('../db');
+const {Cita, Cita_Servicio, Servicio, Categoria} = require('../db');
 const { Op } = require ('sequelize');
 const jwt = require('jsonwebtoken');
 
@@ -62,8 +62,8 @@ CitaController.crearCita = async (req, res, next) => {
 
 
 CitaController.get = (req, res, next) => {
-
-    Cita.findAll().then(Citas => {
+    // 🔥 Usar raw: true para obtener fechas como strings sin conversión UTC
+    Cita.findAll({ raw: true }).then(Citas => {
         res.json(Citas)
     }).catch(next);
 };
@@ -258,13 +258,22 @@ CitaController.getCitasPorCliente = async (req, res, next) => {
             where: {
                 Id_Cliente: clienteId
             },
-            order: [['Fecha_Inicio', 'DESC']]
+            order: [['Fecha_Inicio', 'DESC']],
+            raw: true // 🔥 Obtener datos sin transformación de Sequelize
         });
+
+        // 🔥 Formatear fechas para evitar conversión UTC
+        const citasFormateadas = citas.map(cita => ({
+            ...cita,
+            // Las fechas ya vienen como strings gracias a dateStrings: true y raw: true
+            Fecha_Inicio: cita.Fecha_Inicio,
+            Fecha_Final: cita.Fecha_Final
+        }));
 
         res.json({
             clienteId,
-            total: citas.length,
-            citas
+            total: citasFormateadas.length,
+            citas: citasFormateadas
         });
 
     } catch (error) {
@@ -302,7 +311,67 @@ CitaController.agregarServicioACita = async (req, res, next) => {
     }
 };
 
+// 🔥 Obtener servicios de una cita específica
+CitaController.getServiciosDeCita = async (req, res, next) => {
+    try {
+        const citaId = req.params.id;
 
+        // Buscar los servicios asociados a la cita
+        const citaServicios = await Cita_Servicio.findAll({
+            where: { Id_Cita: citaId },
+            raw: true
+        });
+
+        if (citaServicios.length === 0) {
+            return res.json({
+                citaId,
+                total: 0,
+                servicios: []
+            });
+        }
+
+        // Obtener los detalles de cada servicio (sin include para evitar problemas de asociación)
+        const serviciosIds = citaServicios.map(cs => cs.Id_Servicio);
+        const servicios = await Servicio.findAll({
+            where: { Id: serviciosIds },
+            raw: true
+        });
+
+        // Obtener categorías para cada servicio
+        const serviciosFormateados = await Promise.all(servicios.map(async (s) => {
+            let categoriaNombre = 'Sin categoría';
+            
+            if (s.Id_Categoria) {
+                const categoria = await Categoria.findOne({
+                    where: { Id: s.Id_Categoria },
+                    raw: true
+                });
+                if (categoria) {
+                    categoriaNombre = categoria.Nombre;
+                }
+            }
+            
+            return {
+                Id: s.Id,
+                Nombre: s.Nombre,
+                Descripcion: s.Descripcion,
+                Precio: s.Precio,
+                Imagen: s.Imagen,
+                Categoria: categoriaNombre
+            };
+        }));
+
+        res.json({
+            citaId,
+            total: serviciosFormateados.length,
+            servicios: serviciosFormateados
+        });
+
+    } catch (error) {
+        console.error("Error al obtener servicios de la cita:", error);
+        next(error);
+    }
+};
 
 
 module.exports = CitaController;

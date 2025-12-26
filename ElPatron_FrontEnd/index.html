@@ -3,175 +3,403 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolarizadosPro</title>
-  <link rel="stylesheet" href="output.css">
+  <title>El Patrón - Polarizados</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            red: {
+              50: '#fef2f2',
+              100: '#fee2e2',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="styles.css">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream-100 font-sans">
+<body class="bg-white font-sans antialiased">
 
   <!-- Navbar -->
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-white shadow">
-    <h1 class="text-2xl font-bold text-gray-800">Polarizados El patron</h1>
-    <div class="space-x-6 relative flex items-center">
-      <a href="#" class="text-gray-600 hover:text-black">Inicio</a>
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 lg:px-12 py-3 bg-white/95 backdrop-blur-sm shadow-sm">
+    <a href="#" class="flex items-center">
+      <img src="login/patron.png" alt="El Patrón" class="h-10 sm:h-12 lg:h-14 w-auto"">
+    </a>
+    <div class="flex items-center gap-6">
+      <a href="#" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium">Inicio</a>
   
-      <!-- Categorías con dropdown -->
-      <div class="relative group inline-block">
-        <button id="categoriasBtn" class="text-gray-600 hover:text-black focus:outline-none">Categorías</button>
-        <div id="dropdownMenu" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 w-40 z-50 transition-all duration-300 opacity-0 group-hover:block group-hover:opacity-100">
-          <a href="#" data-category="polarizados" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Polarizados</a>
-          <a href="#" data-category="alarmas" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Alarmas</a>
-          <a href="#" data-category="sonidos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sonidos</a>
-          
-        </div>
-      </div>
+    
   
-      <a href="#" data-category="contacto" class="text-gray-600 hover:text-black">Contacto</a>
-      <a href="login/login.html" class="text-gray-600 hover:text-black">Iniciar sesión</a>
-      <a href="/calendario/date.html" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 inline-block">Agendar cita</a>
+      <a href="#contacto" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium">Contacto</a>
+      
+      <!-- Botón Login (visible cuando NO está logueado) -->
+      <a href="login/login.html" id="btnLogin" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium">
+        <i class="fas fa-user mr-1"></i> Iniciar sesión
+      </a>
+      
+      <!-- Botón Mis Citas (visible cuando está logueado) -->
+      <a href="miscitas.html" id="btnMisCitas" class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium hidden">
+        <i class="fas fa-calendar-check mr-1"></i> Mis citas
+      </a>
+      
+      <!-- Botón Logout (visible cuando está logueado) -->
+      <button id="btnLogout" class="hidden w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-600 transition-all" title="Cerrar sesión">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+      
+      <a href="Calendario/date.html" class="bg-red-600 text-white px-5 py-2.5 rounded-lg hover:bg-red-700 transition-all shadow-md hover:shadow-lg text-sm font-semibold">Agendar cita</a>
     </div>
   </nav>
   
 
   <!-- Hero Section -->
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-8 py-16">
-    <div>
-      <h2 class="text-4xl font-bold text-gray-900 mb-4">Tu auto, más seguro y con estilo</h2>
-      <p class="text-gray-600 mb-6">Instalamos polarizados, alarmas y cámaras con garantía de calidad,estas interesado en una cotizacion, dejanos tu correo y nosotros te contactamos</p>
-      <div class="flex flex-col sm:flex-row gap-4">
-  <button id="btnAbrirCotizacion" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">
-    Solicitar cotización personal
-  </button>
-</div>
-
-    </div>
-    <div class="bg-white p-6 rounded-xl shadow-md text-center">
-      <img src="imagenes/fotopro.jpg" alt="Auto polarizado" class="rounded-lg w-full mb-4" />
-      <p class="text-lg font-semibold text-gray-800">Servicio destacado</p>
-      <p class="text-gray-600">Polarizado 3M con garantía</p>
-      <p class="text-green-600 font-bold mt-2">$1,200 MXN</p>
+  <section class="min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-white pt-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-12">
+      <div>
+        <span class="inline-block bg-red-100 text-red-600 px-4 py-1.5 rounded-full text-sm font-medium mb-6">🚗 Expertos en tu vehículo</span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          Tu auto, más seguro <span class="text-red-600">y con estilo</span>
+        </h1>
+        <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+          Instalamos polarizados, alarmas y cámaras con garantía de calidad. ¿Estás interesado en una cotización? Déjanos tu correo y nosotros te contactamos.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button id="btnAbrirCotizacion" class="bg-red-600 text-white px-8 py-4 rounded-xl hover:bg-red-700 transition-all shadow-lg hover:shadow-xl font-semibold text-base">
+            Solicitar cotización
+          </button>
+          <a href="Calendario/date.html" class="border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl hover:border-red-600 hover:text-red-600 transition-all font-semibold text-base text-center">
+            Agendar cita
+          </a>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow-2xl border border-gray-100">
+        <img src="imagenes/fotopro.jpg" alt="Auto polarizado" class="rounded-xl w-full mb-5 aspect-video object-cover" />
+        <div class="text-center">
+          <span class="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold mb-3">⭐ DESTACADO</span>
+          <p class="text-xl font-bold text-gray-900">Polarizado Premium 3M</p>
+          <p class="text-gray-500 mt-1 text-sm">Con garantía de por vida</p>
+          <p class="text-red-600 font-bold mt-4 text-3xl">$1,200 <span class="text-base font-normal text-gray-400">MXN</span></p>
+        </div>
+      </div>
     </div>
   </section>
 
 
+  <!-- Categorías Section -->
+  <section id="Categorias-section" class="transition-all duration-700 px-6 lg:px-8 py-16 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header de la sección -->
+      <div class="text-center mb-12">
+        <span class="inline-block bg-red-600/20 text-red-400 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+          <i class="fas fa-th-large mr-2"></i>Nuestros Servicios
+        </span>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Categorías de Servicios</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Selecciona una categoría para ver nuestros servicios disponibles</p>
+      </div>
 
+      <!-- Tabs de navegación -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10" id="category-tabs">
+        <button data-tab="all" class="category-tab active px-6 py-3 rounded-xl font-medium transition-all text-sm flex items-center gap-2 bg-red-600 text-white">
+          <i class="fas fa-th-large"></i>
+          Todos
+        </button>
+        <button data-tab="Polarizados" class="category-tab px-6 py-3 rounded-xl font-medium transition-all text-sm flex items-center gap-2 bg-gray-800 text-gray-300 hover:bg-gray-700">
+          <i class="fas fa-car-side"></i>
+          Polarizados
+        </button>
+        <button data-tab="Alarmas" class="category-tab px-6 py-3 rounded-xl font-medium transition-all text-sm flex items-center gap-2 bg-gray-800 text-gray-300 hover:bg-gray-700">
+          <i class="fas fa-bell"></i>
+          Alarmas
+        </button>
+        <button data-tab="Sonidos" class="category-tab px-6 py-3 rounded-xl font-medium transition-all text-sm flex items-center gap-2 bg-gray-800 text-gray-300 hover:bg-gray-700">
+          <i class="fas fa-volume-up"></i>
+          Sonidos
+        </button>
+      </div>
 
-  <section id="Categorias-section" class="transition-all duration-700 px-8 py-12 bg-gray-900 text-white">
-    
-
+      <!-- Contenedor de servicios por categoría -->
+      <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Los servicios se cargan dinámicamente -->
+        <div class="col-span-full text-center py-12">
+          <i class="fas fa-spinner fa-spin text-4xl text-gray-600 mb-4"></i>
+          <p class="text-gray-400">Cargando servicios...</p>
+        </div>
+      </div>
+    </div>
   </section>
 
 
+  <!-- Footer Mejorado -->
+  <footer class="bg-gray-900 text-white" id="contacto">
+    <!-- Sección principal del footer -->
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="grid md:grid-cols-4 gap-12">
+        
+        <!-- Logo y descripción -->
+        <div class="md:col-span-1">
+          <img src="login/patron.png" alt="El Patrón" class="h-16 mb-4">
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Especialistas en polarizados, alarmas y sistemas de sonido para tu vehículo. Calidad y garantía en cada servicio.
+          </p>
+        </div>
 
+        <!-- Enlaces rápidos -->
+        <div>
+          <h3 class="text-lg font-semibold mb-6 text-white relative">
+            Enlaces
+            <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-600 -mb-2"></span>
+          </h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-red-600"></i> Inicio</a></li>
+            <li><a href="#Categorias-section" class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-red-600"></i> Servicios</a></li>
+            <li><a href="Calendario/date.html" class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-red-600"></i> Agendar Cita</a></li>
+            <li><a href="login/login.html" class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-red-600"></i> Mi Cuenta</a></li>
+          </ul>
+        </div>
 
+        <!-- Contacto -->
+        <div>
+          <h3 class="text-lg font-semibold mb-6 text-white relative">
+            Contacto
+            <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-600 -mb-2"></span>
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-phone text-red-500 mt-1"></i>
+              <div>
+                <p class="text-gray-400 text-sm">Teléfono</p>
+                <a href="tel:6681136656" class="text-white hover:text-red-500 transition font-medium">668 113 6656</a>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-map-marker-alt text-red-500 mt-1"></i>
+              <div>
+                <p class="text-gray-400 text-sm">Dirección</p>
+                <a href="https://maps.app.goo.gl/GTVhqDu4W14CLxM28?g_st=aw" target="_blank" class="text-white hover:text-red-500 transition text-sm leading-relaxed">
+                  Blvd. Rosario Valenzuela Fierro 213, Francisco Villa, 81278 Los Mochis, Sin.
+                </a>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-clock text-red-500 mt-1"></i>
+              <div>
+                <p class="text-gray-400 text-sm">Horario</p>
+                <p class="text-white">Lun - Sáb: 9:00 - 18:00</p>
+              </div>
+            </li>
+          </ul>
+        </div>
 
+        <!-- Redes sociales -->
+        <div>
+          <h3 class="text-lg font-semibold mb-6 text-white relative">
+            Síguenos
+            <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-red-600 -mb-2"></span>
+          </h3>
+          <div class="flex gap-3 mb-6">
+            <a href="https://www.facebook.com/tuNegocio" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-lg flex items-center justify-center transition">
+              <i class="fab fa-facebook-f text-white"></i>
+            </a>
+            <a href="https://www.instagram.com/tuNegocio" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-lg flex items-center justify-center transition">
+              <i class="fab fa-instagram text-white"></i>
+            </a>
+            <a href="https://wa.me/526681136656" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-lg flex items-center justify-center transition">
+              <i class="fab fa-whatsapp text-white"></i>
+            </a>
+            <a href="https://www.tiktok.com/@tuNegocio" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-lg flex items-center justify-center transition">
+              <i class="fab fa-tiktok text-white"></i>
+            </a>
+          </div>
+          <p class="text-gray-400 text-sm">¿Tienes dudas? Escríbenos por WhatsApp</p>
+          <a href="https://wa.me/526681136656" target="_blank" class="inline-flex items-center gap-2 mt-3 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition text-sm font-medium">
+            <i class="fab fa-whatsapp"></i> Enviar mensaje
+          </a>
+        </div>
 
-<footer class="bg-gray-900 text-white py-10 px-6 mt-24" id="contacto">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-    
-    <!-- Información de contacto -->
-    <div>
-      <h3 class="text-xl font-semibold mb-4">Contáctanos</h3>
-      <p class="mb-2">
-        <strong>Teléfono:</strong>
-        <a href="tel:+5211234567890" class="text-green-400 hover:underline">6681136656</a>
-      </p>
-
-      <!-- Aquí reemplazas la línea de dirección por este bloque -->
-      <p>
-        <strong>Dirección:</strong>
-        <a href="https://maps.app.goo.gl/GTVhqDu4W14CLxM28?g_st=aw"
-           target="_blank"
-           class="text-green-400 hover:underline">
-          Blvd. Rosario Valenzuela Fierro 213, Francisco Villa, 81278 Los Mochis, Sin.00
-        </a>
-      </p>
+      </div>
     </div>
 
-    <!-- Enlaces o redes sociales -->
-    <div>
-  <h3 class="text-xl font-semibold mb-4">Síguenos</h3>
-  <ul class="space-y-2">
-    <li>
-      <a href="https://www.facebook.com/tuNegocio" target="_blank" class="text-green-400 hover:underline">
-        Facebook
-      </a>
-    </li>
-    <li>
-      <a href="https://www.instagram.com/tuNegocio" target="_blank" class="text-green-400 hover:underline">
-        Instagram
-      </a>
-    </li>
-    <li>
-      <a href="https://wa.me/5211234567890" target="_blank" class="text-green-400 hover:underline">
-        WhatsApp
-      </a>
-    </li>
-  </ul>
-</div>
-
-
-</div>
-
-  <!-- Línea inferior -->
-  <div class="text-center text-sm text-gray-400 mt-8 border-t border-gray-700 pt-4">
-    &copy; 2025 El patron. Todos los derechos reservados.
-  </div>
-</footer>
-
-<!-- Modal Cotización -->
-<div id="modalCotizacion" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-
- <div
-  id="contenedorModal"
-  class="bg-white p-6 rounded-lg w-full max-w-md relative 
-         transform scale-95 opacity-0 transition-all duration-300 ease-out"
->
-
-   <button id="cerrarModal" class="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-red-500">
-    X
-  </button>
-
-
-    <h2 class="text-xl font-bold mb-4 mt-6 text-center">Solicitar Cotización</h2>
-
-    <form id="formCotizacion" class="relative space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Nombres y apellidos</label>
-        <input type="text" name="nombre" required class="w-full border border-gray-300 rounded px-3 py-2" />
+    <!-- Línea inferior -->
+    <div class="border-t border-gray-800">
+      <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-500 text-sm">
+          &copy; 2025 <span class="text-white font-medium">El Patrón Polarizados</span>. Todos los derechos reservados.
+        </p>
+        <div class="flex gap-6 text-sm">
+          <a href="#" class="text-gray-500 hover:text-red-500 transition">Términos</a>
+          <a href="#" class="text-gray-500 hover:text-red-500 transition">Privacidad</a>
+        </div>
       </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Ingresa correo electrónico</label>
-        <input type="email" name="correo" required class="w-full border border-gray-300 rounded px-3 py-2" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Modelo del carro</label>
-        <input type="text" name="modelo" required class="w-full border border-gray-300 rounded px-3 py-2" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-        <select id="selectCategoria" class="w-full border border-gray-300 rounded px-3 py-2">
-          <option value="">Selecciona una categoría</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Servicio</label>
-        <select id="selectServicio" class="w-full border border-gray-300 rounded px-3 py-2">
-          <option value="">Selecciona un servicio</option>
-        </select>
-        <div id="precioServicio" class="text-green-600 font-semibold mt-2 text-sm"></div>
-      </div>
-      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
-        Enviar cotización
+    </div>
+  </footer>
+
+  <!-- Modal Cotización -->
+  <div id="modalCotizacion" class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50">
+    <div id="contenedorModal" class="bg-white p-8 rounded-2xl w-full max-w-md relative transform scale-95 opacity-0 transition-all duration-300 ease-out shadow-2xl">
+      <button id="cerrarModal" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600 transition">
+        <i class="fas fa-times"></i>
       </button>
-    </form>
+
+      <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Solicitar Cotización</h2>
+
+      <form id="formCotizacion" class="space-y-4" novalidate>
+        <!-- Nombre -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Nombres y apellidos <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <input 
+              type="text" 
+              name="nombre" 
+              id="inputNombre"
+              required 
+              minlength="3"
+              maxlength="100"
+              pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+              placeholder="Ej: Juan Pérez García"
+              class="form-input w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition outline-none" 
+            />
+            <i class="fas fa-user absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          </div>
+          <p class="error-message text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <!-- Correo -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Correo electrónico <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <input 
+              type="email" 
+              name="correo" 
+              id="inputCorreo"
+              required 
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              placeholder="Ej: correo@ejemplo.com"
+              class="form-input w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition outline-none" 
+            />
+            <i class="fas fa-envelope absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          </div>
+          <p class="error-message text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Teléfono <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <input 
+              type="tel" 
+              name="telefono" 
+              id="inputTelefono"
+              required 
+              minlength="10"
+              maxlength="15"
+              pattern="^[0-9]{10,15}$"
+              placeholder="Ej: 6681234567"
+              class="form-input w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition outline-none" 
+            />
+            <i class="fas fa-phone absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          </div>
+          <p class="error-message text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <!-- Modelo del carro -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Modelo del carro <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <input 
+              type="text" 
+              name="modelo" 
+              id="inputModelo"
+              required 
+              minlength="2"
+              maxlength="50"
+              placeholder="Ej: Honda Civic 2022"
+              class="form-input w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition outline-none" 
+            />
+            <i class="fas fa-car absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          </div>
+          <p class="error-message text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <!-- Categoría -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Categoría <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <select 
+              id="selectCategoria" 
+              name="categoria"
+              required
+              class="form-input w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition outline-none appearance-none bg-white"
+            >
+              <option value="">Selecciona una categoría</option>
+            </select>
+            <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+          </div>
+          <p class="error-message text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <!-- Servicio -->
+        <div class="form-group">
+          <label class="block text-sm font-medium text-gray-700 mb-1">
+            Servicio <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <select 
+              id="selectServicio" 
+              name="servicio"
+              required
+              class="form-input w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition outline-none appearance-none bg-white"
+            >
+              <option value="">Selecciona un servicio</option>
+            </select>
+            <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+          </div>
+          <p class="error-message text-red-500 text-xs mt-1 hidden"></p>
+          <div id="precioServicio" class="text-red-600 font-semibold mt-2 text-sm"></div>
+        </div>
+
+        <!-- Mensaje de error general -->
+        <div id="errorGeneral" class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+          <i class="fas fa-exclamation-circle mr-2"></i>
+          <span>Por favor completa todos los campos correctamente</span>
+        </div>
+
+        <!-- Botón Submit -->
+        <button 
+          type="submit" 
+          id="btnEnviarCotizacion"
+          class="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition font-semibold shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <i class="fas fa-paper-plane"></i>
+          Enviar cotización
+        </button>
+
+        <p class="text-xs text-gray-400 text-center mt-2">
+          <i class="fas fa-lock mr-1"></i>
+          Tus datos están seguros con nosotros
+        </p>
+      </form>
+    </div>
   </div>
-</div>
 
-
-
-<script src="script2.js"></script>
+  <script src="toast.js"></script>
+  <script src="script2.js"></script>
 </body>
 </html>

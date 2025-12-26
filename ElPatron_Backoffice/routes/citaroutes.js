@@ -2,17 +2,19 @@ const router = require('express').Router();
 const CitaController = require('../controllers/citaController');
 const authMiddleware = require("../middlewares/middlewareauth");
 
-router.route('/Cita')
-    .post(CitaController.crearCita) // to create new subordinate resources
-    .get(CitaController.get)
-    .patch(CitaController.editDate)
-
-
+// Rutas específicas primero (sin parámetros dinámicos)
+router.get('/Cita/disponibilidad', CitaController.obtenerDisponibilidad);
+router.get('/Cita/cliente', authMiddleware, CitaController.getCitasPorCliente);
 router.post('/Cita/servicios', CitaController.agregarServicioACita);
 
-
-router.get('/Cita/disponibilidad', CitaController.obtenerDisponibilidad);
+// Rutas con parámetros dinámicos después
+router.get('/Cita/:id/servicios', CitaController.getServiciosDeCita);
 router.patch('/Cita/:id/cancelar', CitaController.cancelarCita);
-router.get('/Cita/cliente',authMiddleware, CitaController.getCitasPorCliente);
+
+// Ruta base al final
+router.route('/Cita')
+    .post(CitaController.crearCita)
+    .get(CitaController.get)
+    .patch(CitaController.editDate);
 
 module.exports = router;

@@ -300,6 +300,350 @@ header .current-date {
 }
 
 /* ==================== RESPONSIVE ==================== */
+/* ==================== HORARIOS PASADOS ==================== */
+.past-time {
+    opacity: 0.5;
+    background-color: #f9fafb;
+}
+
+.past-time td {
+    color: #9ca3af;
+}
+
+.past-time button {
+    background-color: #e5e7eb !important;
+    color: #9ca3af !important;
+    cursor: not-allowed;
+}
+
+.text-gray-400 {
+    color: #9ca3af;
+}
+
+/* ==================== MODAL DETALLE CITA ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.modal-content.modal-detalle {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 95%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #f1f5f9;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.modal-header {
+    position: relative;
+    padding: 24px 24px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    color: white;
+    font-size: 24px;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px;
+}
+
+.cita-badge {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #64748b;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.detalle-seccion {
+    margin-bottom: 24px;
+}
+
+.detalle-seccion:last-child {
+    margin-bottom: 0;
+}
+
+.detalle-seccion h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detalle-seccion h3 i {
+    color: #dc2626;
+}
+
+.detalle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.detalle-item {
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.detalle-item label {
+    display: block;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.detalle-item p {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* Estado badges */
+.estado-pendiente {
+    color: #f59e0b;
+}
+
+.estado-completada {
+    color: #10b981;
+}
+
+.estado-cancelada {
+    color: #ef4444;
+}
+
+/* Servicios lista */
+.servicios-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.servicio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.servicio-item .servicio-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.servicio-item .servicio-icono {
+    width: 40px;
+    height: 40px;
+    background: #fef2f2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc2626;
+}
+
+.servicio-item .servicio-nombre {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.servicio-item .servicio-categoria {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.servicio-item .servicio-precio {
+    font-weight: 700;
+    color: #dc2626;
+    font-size: 1rem;
+}
+
+.total-servicios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px dashed #e2e8f0;
+}
+
+.total-servicios span:first-child {
+    font-weight: 600;
+    color: #64748b;
+}
+
+.total-precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dc2626;
+}
+
+.loading-text {
+    text-align: center;
+    color: #94a3b8;
+    padding: 20px;
+}
+
+.no-servicios {
+    text-align: center;
+    color: #94a3b8;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 16px 24px 24px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #e2e8f0;
+    background: #ffffff;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.btn-primary {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-radius: 10px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+    background: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Fila clickeable */
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clickable-row:hover {
+    background-color: #f8fafc;
+}
+
 @media screen and (max-width: 560px) {
     .form-popup {
         padding: 16px;

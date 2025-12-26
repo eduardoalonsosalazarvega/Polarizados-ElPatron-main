@@ -3,11 +3,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Dynamic Calendar JavaScript | CodingNepal</title>
+    <title>Gestión de Citas | El Patrón</title>
     <link rel="stylesheet" href="/CSS/Date3.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="/JS/Date3.js" defer></script>
   </head>
   <body>
@@ -45,6 +47,7 @@
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Gestionar</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -55,6 +58,83 @@
     </div>
 </div>
 
+<!-- Modal de Detalles de Cita -->
+<div id="modalDetalleCita" class="modal-overlay hidden">
+    <div class="modal-content modal-detalle">
+        <button class="modal-close" onclick="cerrarModalDetalle()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="modal-header">
+            <div class="modal-icon">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <h2>Detalles de la Cita</h2>
+            <span id="modal-cita-id" class="cita-badge">#000</span>
+        </div>
+
+        <div class="modal-body">
+            <!-- Información del Cliente -->
+            <div class="detalle-seccion">
+                <h3><i class="fas fa-user"></i> Información del Cliente</h3>
+                <div class="detalle-grid">
+                    <div class="detalle-item">
+                        <label>Nombre completo</label>
+                        <p id="modal-cliente-nombre">-</p>
+                    </div>
+                    <div class="detalle-item">
+                        <label>Correo electrónico</label>
+                        <p id="modal-cliente-email">-</p>
+                    </div>
+                    <div class="detalle-item">
+                        <label>Teléfono</label>
+                        <p id="modal-cliente-telefono">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de la Cita -->
+            <div class="detalle-seccion">
+                <h3><i class="fas fa-clock"></i> Información de la Cita</h3>
+                <div class="detalle-grid">
+                    <div class="detalle-item">
+                        <label>Fecha</label>
+                        <p id="modal-cita-fecha">-</p>
+                    </div>
+                    <div class="detalle-item">
+                        <label>Horario</label>
+                        <p id="modal-cita-horario">-</p>
+                    </div>
+                    <div class="detalle-item">
+                        <label>Estado</label>
+                        <p id="modal-cita-estado">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicios -->
+            <div class="detalle-seccion">
+                <h3><i class="fas fa-wrench"></i> Servicios Solicitados</h3>
+                <div id="modal-servicios-lista" class="servicios-lista">
+                    <p class="loading-text"><i class="fas fa-spinner fa-spin"></i> Cargando servicios...</p>
+                </div>
+                <div class="total-servicios">
+                    <span>Total estimado:</span>
+                    <span id="modal-total-precio" class="total-precio">$0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-secondary" onclick="cerrarModalDetalle()">
+                <i class="fas fa-times"></i> Cerrar
+            </button>
+            <button id="btn-completar-modal" class="btn-primary" onclick="completarCitaDesdeModal()">
+                <i class="fas fa-check"></i> Marcar como atendida
+            </button>
+        </div>
+    </div>
+</div>
 
   </body>
 </html>
